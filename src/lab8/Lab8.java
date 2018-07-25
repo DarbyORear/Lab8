@@ -2,6 +2,7 @@ package lab8;
 
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 //Darby O'Rear 7/24
 
@@ -17,6 +18,11 @@ public class Lab8 {
 		String faveFoods[] = {"Thai", "Wasabi peas", "Japanese", "chocolate", "coffee", "Alfredo", "bread", "cookies", "pizza", "hamburgers"};
 		String faveAnimals[] = {"dog", "cat", "horse", "duck", "rabbit", "ferret", "guinea pig", "fox", "hamster", "flamingo"};
 	    String userContinue;
+	    int wantToLearnAbout=0;
+	    String studentName="";
+	    
+	    
+	    
 //Ask user what student they want to learn about.
 		System.out.println("Hello! Thanks for wanting to learn more about Grand Circus students. Here is a list of our students: ");
 		String studentNumString = Arrays.toString(studentNum);
@@ -28,8 +34,21 @@ public class Lab8 {
 //		public static String learnSomethingNew(String randomName) {
 		System.out.println("Please enter the number for the student you want to learn more about: ");
 		Scanner scnr = new Scanner(System.in);
-		int wantToLearnAbout = scnr.nextInt();
-		String studentName = names[wantToLearnAbout - 1];
+		
+		boolean inputIsValid = false;
+		do {
+			try {
+				wantToLearnAbout = scnr.nextInt();
+				inputIsValid = true;
+				studentName = names[wantToLearnAbout - 1];
+
+			} catch (InputMismatchException | ArrayIndexOutOfBoundsException ex) {
+			System.out.println("Sorry, invalid entry.");
+//			wantToLearnAbout = scnr.nextInt();
+//			inputIsValid = true;
+//			studentName = names[wantToLearnAbout - 1];
+			}
+		}while (inputIsValid == false);
 		
 		
 		System.out.println("What would you like to know about " + studentName + "? Would you like to know his/her favorite food or favorite animal?");
@@ -49,6 +68,7 @@ public class Lab8 {
 			} else {				
 				System.out.println("Sorry, that's not something I can tell you about " + studentName + "."); //TRY-CATCH??
 				}
+	
 		
 		System.out.println("Would you like to learn another fact about a Grand Circus student? Please type yes or no: " );
 		System.out.println();
